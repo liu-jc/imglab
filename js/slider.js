@@ -59,8 +59,12 @@ function emptySlider(){
     $('.photolist').empty();
 }
 
-
+var target = '';
 $(document).on('click', '.photolist img', function(ev){
+    $("#test").val("");
+    $(target).removeClass("color_border")
     $('#img').attr('src', imagesData[$(this).attr('label')].data)
     $('#img').attr('label', $(this).attr('label'))
+    target = ev.target;
+    $(ev.target).addClass("color_border");
 });

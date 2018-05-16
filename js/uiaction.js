@@ -58,6 +58,9 @@ $('#img').on('load',function(){
     clearCanvas();
     var imageName = $(this).attr('label');
     images[imageName] && drawAllBoxData(images[imageName].boxes);
+    if(images[imageName] && images[imageName].hasOwnProperty('label')){
+        $("#test").val(images[imageName].label);
+    }
     deselectAll();
     
     //update widget
@@ -288,6 +291,17 @@ $("#exportPtsBtn").click(function(){
     }else{
         $("#info").text("Please select a box.");
     }
+})
+
+$('#test').change(function(){   
+    var imgName = $('#img').attr("label");
+    //alert(imgName);
+    if(!images[imgName]){
+        images[imgName] = {
+            boxes : {}
+        }
+    }
+    images[imgName].label = $('#test').val();
 })
 
 function isLabelBox(el){

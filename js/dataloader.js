@@ -18,6 +18,8 @@ function updateLabelBox(box_el){
             height: $(box_el).height()
         }
     }
+    //var options = $("#test option:selected");
+    //images[imgName].fuck = options.text()
 }
 
 function deleteAllLableBoxes(){

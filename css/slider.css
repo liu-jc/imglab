@@ -44,3 +44,7 @@
 .photolist-wrapper .photolist  img:hover {
     opacity: 1.0;
 }
+
+.color_border{
+    border: 10px solid red !important;;
+}
