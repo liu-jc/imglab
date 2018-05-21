@@ -59,8 +59,16 @@ $('#img').on('load',function(){
     var imageName = $(this).attr('label');
     images[imageName] && drawAllBoxData(images[imageName].boxes);
     if(images[imageName] && images[imageName].hasOwnProperty('label')){
+        $("#fenqi_label").val(images[imageName].label);
+    }
+    else{
+        $("#fenqi_label").val('请选择');
+    }
+    /*
+    if(images[imageName] && images[imageName].hasOwnProperty('label')){
         $("#test").val(images[imageName].label);
     }
+    */
     deselectAll();
     
     //update widget
@@ -292,7 +300,7 @@ $("#exportPtsBtn").click(function(){
         $("#info").text("Please select a box.");
     }
 })
-
+/*
 $('#test').change(function(){   
     var imgName = $('#img').attr("label");
     //alert(imgName);
@@ -302,6 +310,22 @@ $('#test').change(function(){
         }
     }
     images[imgName].label = $('#test').val();
+})
+*/
+$('#fenqi_label').change(function(){   
+    var imgName = $('#img').attr("label");
+    //alert(imgName);
+    if(!images[imgName]){
+        images[imgName] = {
+            boxes : {}
+        }
+    }
+    val = $('#fenqi_label').val();
+    //console.log($('#fenqi_label'))
+    //console.log($('#fenqi_label').val())
+    if($('#fenqi_label').val() != '请选择'){
+        images[imgName].label = $('#fenqi_label').val();
+    }
 })
 
 function isLabelBox(el){
