@@ -30,12 +30,14 @@ function addToSlider(imgData){
 }
 
 var sliding = false;
+var count = 0;
 var sliderMove = "80px";
 $('.left-paddle').click(function() {
     var photolist = $('.photolist');
     if (sliding === false) {
         sliding = true;
-        photolist.css({ left: "-"+sliderMove })
+        photolist
+            .css({ left: "-"+sliderMove })
             .prepend(photolist.children('img:last-child'))
             .animate({ left: 0 }, 200, 'linear', function() {
                 sliding = false;
@@ -46,7 +48,8 @@ $('.right-paddle').click(function() {
     var photolist = $('.photolist');
     if (sliding === false) {
         sliding = true;
-        photolist.animate({ left: "-"+sliderMove }, 200, 'linear', function() {
+        photolist
+            .animate({ left: "-"+sliderMove }, 200, 'linear', function() {
             photolist.css({ left: 0 })
                 .append(photolist.children('img:first-child'));
             sliding = false;

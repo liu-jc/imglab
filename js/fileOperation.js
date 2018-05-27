@@ -32,15 +32,28 @@ function readImageFiles(input) {
         emptyCanvas();
         images = {};//remove previous data
         imagesData = {};
+        num_img = file_list.length
         for(i=0;i<file_list.length;i++){
             readImageFile(file_list[i])
         }
+
         //for(i=0;i<input.files.length;i++){
         //    readImageFile(input.files[i]);
         //}
     }
 }
 
+function sort_add(imagesData){
+    console.log('sort_add')
+    keys = Object.keys(imagesData)
+    keys = Array.from(keys).sort()
+    console.log(keys)
+    for(i=0;i<keys.length;i++){
+        console.log(i,":",imagesData[keys[i]]);
+        addToSlider(imagesData[keys[i]])
+    }
+
+}
 /*read an image file and add to slider*/
 function readImageFile(f){
     if(f.type.startsWith("image")){
@@ -52,7 +65,11 @@ function readImageFile(f){
             };
             imagesData[f.name] = imgData
             console.log(f.name)
-            addToSlider(imgData);
+            num_img--;
+            if(num_img == 0){
+                sort_add(imagesData)
+            }
+            //addToSlider(imgData);
         }
         console.log(f.name)
         reader.readAsDataURL(f);
