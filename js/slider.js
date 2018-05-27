@@ -23,6 +23,8 @@ function addToSlider(imgData){
     var label = document.createAttribute("label"); 
     label.value = imgData.name;
     img.setAttributeNode(label);
+    img.order = imgData.order;
+    //console.log(img.order);
     img.title = imgData.name;
     img.width = img.height = 80;
     thumbnails.push(img);
@@ -34,26 +36,33 @@ var count = 0;
 var sliderMove = "80px";
 $('.left-paddle').click(function() {
     var photolist = $('.photolist');
-    if (sliding === false) {
-        sliding = true;
-        photolist
-            .css({ left: "-"+sliderMove })
-            .prepend(photolist.children('img:last-child'))
-            .animate({ left: 0 }, 200, 'linear', function() {
-                sliding = false;
-            });
+    //console.log(photolist.children('img:first-child')[0].order)
+    if (photolist.children('img:first-child')[0].order != 0){
+        if (sliding === false) {
+            sliding = true;
+            photolist
+                .css({ left: "-"+sliderMove })
+                .prepend(photolist.children('img:last-child'))
+                .animate({ left: 0 }, 200, 'linear', function() {
+                    sliding = false;
+                });
+        }
     }
 });
 $('.right-paddle').click(function() {
     var photolist = $('.photolist');
-    if (sliding === false) {
-        sliding = true;
-        photolist
-            .animate({ left: "-"+sliderMove }, 200, 'linear', function() {
-            photolist.css({ left: 0 })
-                .append(photolist.children('img:first-child'));
-            sliding = false;
-        });
+    //console.log(photolist.children('img:nth-child(10)')[0].order)
+    //console.log(photolist.children('img:last-child')[0].order)
+    if (photolist.children('img:nth-child(10)')[0].order != -1){
+        if (sliding === false) {
+            sliding = true;
+            photolist
+                .animate({ left: "-"+sliderMove }, 200, 'linear', function() {
+                photolist.css({ left: 0 })
+                    .append(photolist.children('img:first-child'));
+                sliding = false;
+            });
+        }
     }
 });
 

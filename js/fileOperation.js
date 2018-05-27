@@ -19,38 +19,30 @@ function sortName(a,b)
 /* Load selected images or images fom a folder in slider*/
 function readImageFiles(input) {
     if (input.files && input.files[0]) {
-        console.log(input.files)
-        for(i=0;i<input.files.length;i++){
-            console.log(input.files[i].name)
-        }
-        //input.files = Array.from(input.files).sort(sortName)
-        file_list = Array.from(input.files).sort(sortName)
-        console.log(file_list)
-        console.log('--------------------')
         emptySlider();
         hideWidgets();
         emptyCanvas();
         images = {};//remove previous data
         imagesData = {};
-        num_img = file_list.length
-        for(i=0;i<file_list.length;i++){
-            readImageFile(file_list[i])
+        num_img = input.files.length;
+        for(i=0;i<input.files.length;i++){
+            readImageFile(input.files[i]);
         }
-
-        //for(i=0;i<input.files.length;i++){
-        //    readImageFile(input.files[i]);
-        //}
     }
 }
 
 function sort_add(imagesData){
-    console.log('sort_add')
-    keys = Object.keys(imagesData)
-    keys = Array.from(keys).sort()
-    console.log(keys)
+    //console.log('sort_add')
+    keys = Object.keys(imagesData);
+    keys = Array.from(keys).sort();
+    //console.log(keys)
     for(i=0;i<keys.length;i++){
-        console.log(i,":",imagesData[keys[i]]);
-        addToSlider(imagesData[keys[i]])
+        imagesData[keys[i]].order = i;
+        if(i == keys.length - 1){
+            imagesData[keys[i]].order = -1;
+        }
+        //console.log(imagesData[keys[i]].order,":",imagesData[keys[i]]);
+        addToSlider(imagesData[keys[i]]);
     }
 
 }
@@ -63,15 +55,15 @@ function readImageFile(f){
                 name : f.name,
                 data: e.target.result
             };
-            imagesData[f.name] = imgData
-            console.log(f.name)
+            imagesData[f.name] = imgData;
+            //console.log(f.name);
             num_img--;
             if(num_img == 0){
-                sort_add(imagesData)
+                sort_add(imagesData);
             }
             //addToSlider(imgData);
         }
-        console.log(f.name)
+        //console.log(f.name);
         reader.readAsDataURL(f);
     }
 }
