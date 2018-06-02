@@ -285,7 +285,13 @@ var emptyCanvas= function(){
 }
 
 $("#exportBtn").click(function(){
-    download(JSON.stringify(images),"labelled.json","text/plain");
+    var job_name = $("#current_job").val();
+    console.log($("#current_job").val());
+    var labeler_name = $("#labeler_name").val();
+    console.log($("#labeler_name").val());
+    console.log(folder_name);
+    //download(JSON.stringify(images),"labelled.json","text/plain");
+    download(JSON.stringify(images), job_name + "_" + labeler_name + "_" + folder_name + ".json","text/plain");
 })
 
 $("#exportDlibBtn").click(function(){
@@ -320,7 +326,7 @@ $('#fenqi_label').change(function(){
             boxes : {}
         }
     }
-    val = $('#fenqi_label').val();
+    //val = $('#fenqi_label').val();
     //console.log($('#fenqi_label'))
     //console.log($('#fenqi_label').val())
     if($('#fenqi_label').val() != '请选择'){

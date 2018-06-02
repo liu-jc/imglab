@@ -18,6 +18,9 @@ function sortName(a,b)
 
 /* Load selected images or images fom a folder in slider*/
 function readImageFiles(input) {
+    console.log(input.files)
+    folder_name = input.files[0].webkitRelativePath.split("/")[0]
+    console.log(folder_name)
     if (input.files && input.files[0]) {
         emptySlider();
         hideWidgets();
