@@ -66,10 +66,20 @@ $('.right-paddle').click(function() {
     }
 });
 
+//keydown 
+$(document).keydown(function(e){
+    if(e.keyCode==37){
+        $('.left-paddle').click();
+    }
+    if(e.keyCode==39){
+        $('.right-paddle').click();
+    }
+});
+
 
 function emptySlider(){
     $('.photolist').empty();
-}
+};
 
 var target = '';
 $(document).on('click', '.photolist img', function(ev){

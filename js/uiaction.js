@@ -318,6 +318,7 @@ $('#test').change(function(){
     images[imgName].label = $('#test').val();
 })
 */
+
 $('#fenqi_label').change(function(){   
     var imgName = $('#img').attr("label");
     //alert(imgName);
