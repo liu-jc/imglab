@@ -66,17 +66,6 @@ $('.right-paddle').click(function() {
     }
 });
 
-//keydown 
-$(document).keydown(function(e){
-    if(e.keyCode==37){
-        $('.left-paddle').click();
-    }
-    if(e.keyCode==39){
-        $('.right-paddle').click();
-    }
-});
-
-
 function emptySlider(){
     $('.photolist').empty();
 };
@@ -84,9 +73,40 @@ function emptySlider(){
 var target = '';
 $(document).on('click', '.photolist img', function(ev){
     $("#test").val("");
-    $(target).removeClass("color_border")
-    $('#img').attr('src', imagesData[$(this).attr('label')].data)
-    $('#img').attr('label', $(this).attr('label'))
+    $(target).removeClass("color_border");
+    $('#img').attr('src', imagesData[$(this).attr('label')].data);
+    $('#img').attr('label', $(this).attr('label'));
     target = ev.target;
     $(ev.target).addClass("color_border");
+});
+
+//keydown 
+$(document).keydown(function(e){
+    if(e.keyCode==37){
+        //console.log(target);
+        //console.log(target.order);
+        if (target.order != 0){
+            $('.left-paddle').click();
+            var next = target.previousSibling;
+            $(target).removeClass("color_border");
+            //console.log(next);
+            target = next;
+            $('#img').attr('src', imagesData[$(target).attr('label')].data);
+            $('#img').attr('label', $(target).attr('label'));
+            $(next).addClass("color_border");
+        }
+    }
+    if(e.keyCode==39){
+        //console.log(target);
+        if (target.order != -1){
+            var next = target.nextSibling;
+            $(target).removeClass("color_border");
+            //console.log(next);
+            target = next;
+            $('#img').attr('src', imagesData[$(target).attr('label')].data);
+            $('#img').attr('label', $(target).attr('label'));
+            $(next).addClass("color_border");
+            $('.right-paddle').click();
+        }
+    }
 });
